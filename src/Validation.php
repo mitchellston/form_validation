@@ -1,6 +1,6 @@
 <?php
 
-namespace Validation;
+namespace PostGetRequestValidation;
 
 use DateTime;
 use Exception;

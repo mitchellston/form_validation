@@ -169,7 +169,11 @@ class Validation
          * @var int $key
          * @var array{value: string|int, errorMessage:string} $value
          */
+
         foreach ($Attributes as $key => $value) {
+            if($this->VALUE == "" && $key != 0) {
+                return;
+            }
             switch ($key) {
                 //required attribute
                 case 0:

@@ -1,4 +1,12 @@
 {
+
+  "name": "mitchellston/http_request_validation",
+  "description": "This should help with validating POST and GET request in PHP!",
+  "license": ["MIT"],
+  "type": "library",
+  "require": {
+    "php": ">=7.0"
+  },
   "require-dev": {
     "vimeo/psalm": "4.29.0"
   }

@@ -1,4 +1,4 @@
-# POST, GET Request validation
+# Form validation
 
 This project aims to make validation for POST and GET requests easier. The way we get this done is by making the way validation work similar to the input tag of HTML.
 

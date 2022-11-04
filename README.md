@@ -62,6 +62,6 @@ echo $test->getErrors(); # ["A username needs to at least be 5 characters long!"
 
 ## License
 
-This project is licensed under the [MIT](LICENSE.md)
- License - see the [LICENSE.md](LICENSE.md) file for
+This project is licensed under the [MIT](LICENSE)
+ License - see the [LICENSE](LICENSE) file for
 details

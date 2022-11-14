@@ -19,6 +19,7 @@ abstract class Types
     const DATE = 3;
     const TEL = 4;
     const URL = 5;
+    const FILE = 6;
 }
 
 abstract class Attributes
@@ -29,6 +30,9 @@ abstract class Attributes
     const pattern = 3;
     const min = 4;
     const max = 5;
+    const accepted = 6;
+    const maxFileSize = 7;
+    const minFileSize = 8;
 }
 
 class Validation
@@ -44,12 +48,12 @@ class Validation
      * @param string $Name
      * @param int $Method
      * @param int $Type
-     * @param array<int, array{value: string|int, errorMessage:string}> $Attributes
+     * @param array<int, array{value: string|int|array<string|int>, errorMessage:string}> $Attributes
      * @param string $typeError
      */
     function __construct(string $Name, int $Method, int $Type, array $Attributes, string $typeError = "The type of this input is not correct!")
     {
-        $this->VALUE = $this->getValueFromRequest($Name, $Method);
+        $this->VALUE = $this->getValueFromRequest($Name, $Method, $Type);
         $this->cleanUserInput();
         if($this->checkType($Type, $typeError, array_key_exists(0, $Attributes))) {
             $this->useAttributes($Attributes);
@@ -67,9 +71,10 @@ class Validation
      * Gets the value from the right request type
      * @param string $name
      * @param int $method
+     * @param int $type
      * @return string
      */
-    private function getValueFromRequest(string $name, int $method)
+    private function getValueFromRequest(string $name, int $method, int $type)
     {
         /** @psalm-var string $Value */
         $Value = "";
@@ -107,9 +112,9 @@ class Validation
     /**
      * Checks if the value and the type match
      * @return boolean
-     * @var int $TYPE
-     * @var string $typeError
-     * @var boolean $required
+     * @param int $TYPE
+     * @param string $typeError
+     * @param boolean $required
      */
     private function checkType(int $TYPE, string $typeError, bool $required)
     {
@@ -160,7 +165,7 @@ class Validation
 
     /**
      * This function goes through all the specified attributes and checks if the value matches
-     * @param array<int, array{value: string|int, errorMessage:string}> $Attributes
+     * @param array<int, array{value: string|int|array<string|int>, errorMessage:string}> $Attributes
      * @return void
      */
     private function useAttributes(array $Attributes)
@@ -169,7 +174,6 @@ class Validation
          * @var int $key
          * @var array{value: string|int, errorMessage:string} $value
          */
-
         foreach ($Attributes as $key => $value) {
             if($this->VALUE == "" && $key != 0) {
                 return;

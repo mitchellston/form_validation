@@ -107,9 +107,9 @@ class Validation
     /**
      * Checks if the value and the type match
      * @return boolean
-     * @var int $TYPE
-     * @var string $typeError
-     * @var boolean $required
+     * @param int $TYPE
+     * @param string $typeError
+     * @param boolean $required
      */
     private function checkType(int $TYPE, string $typeError, bool $required)
     {
@@ -118,7 +118,7 @@ class Validation
         switch ($TYPE) {
             //Check if value is of type number
             case 1:
-                if (!filter_var($this->VALUE, FILTER_VALIDATE_FLOAT)) {
+                if (!filter_var($this->VALUE, FILTER_VALIDATE_FLOAT) && $this->VALUE != 0) {
                     $error = $typeError;
                 }
                 break;
@@ -165,11 +165,6 @@ class Validation
      */
     private function useAttributes(array $Attributes)
     {
-        /**
-         * @var int $key
-         * @var array{value: string|int, errorMessage:string} $value
-         */
-
         foreach ($Attributes as $key => $value) {
             if($this->VALUE == "" && $key != 0) {
                 return;

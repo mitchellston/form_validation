@@ -23,7 +23,7 @@ Start a composer project
 
 Install the library with composer
 
-    Composer install mitchellston/form_validation
+    Composer require mitchellston/form_validation
 
 Add the library to the composers autoloader (in composer.json)
 
